@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag | slugify }}/
+eleventyComputed:
+  title: "Posts about #{{ tag }}"
+---
+<section class="container section">
+  <header class="page-header">
+    <a class="back-link" href="/tags/">← All topics</a>
+    <h1>#{{ tag }}</h1>
+    {% set tagged = collections.posts | withTag(tag) %}
+    <p>{{ tagged.length }} post{% if tagged.length != 1 %}s{% endif %} on this topic.</p>
+  </header>
+  <div class="card-grid">
+    {% for post in tagged %}
+      {% include "partials/post-card.njk" %}
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="{{ site.language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="/">
+        <svg class="brand__logo" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 26 C10 26 12 6 16 6 S22 26 28 26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="16" cy="6" r="3" fill="currentColor"/>
+        </svg>
+        <span>{{ site.title }}</span>
+      </a>
+
+      {% set navItems = [
+        { url: "/", label: "Home" },
+        { url: "/archive/", label: "Archive" },
+        { url: "/tags/", label: "Topics" },
+        { url: "/about/", label: "About" }
+      ] %}
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          {% for item in navItems %}
+          <li>
+            <a href="{{ item.url }}"
+               {% if page.url == item.url or (item.url != "/" and page.url.startsWith(item.url)) %}aria-current="page"{% endif %}>{{ item.label }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="site-main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>© 2026 {{ site.author }} · {{ site.title }}</p>
+    </div>
+  </footer>
+</body>
+</html>

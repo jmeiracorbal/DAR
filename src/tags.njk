@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: Topics
+description: Browse the posts by topic.
+permalink: /tags/
+---
+<section class="container section">
+  <header class="page-header">
+    <h1>Topics</h1>
+  </header>
+  <ul class="topic-grid">
+    {% for tag in collections.tagList %}
+    {% set count = (collections.posts | withTag(tag)).length %}
+    <li>
+      <a class="topic" href="/tags/{{ tag | slugify }}/">
+        <span class="topic__name">#{{ tag }}</span>
+        <span class="topic__count">{{ count }} post{% if count != 1 %}s{% endif %}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>

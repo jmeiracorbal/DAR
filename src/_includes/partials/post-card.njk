@@ -1,0 +1,19 @@
+<article class="card">
+  <a class="card__media" href="{{ post.url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ post.data.image }}" alt="" loading="lazy" width="1600" height="1000">
+  </a>
+  <div class="card__body">
+    <p class="meta">
+      <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ post.templateContent | readingTime }}</span>
+    </p>
+    <h3 class="card__title"><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+    <p class="card__excerpt">{{ post.data.description }}</p>
+    <ul class="tag-list" aria-label="Topics">
+      {% for tag in post.data.tags %}{% if tag != "posts" %}
+      <li><a class="tag" href="/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
+      {% endif %}{% endfor %}
+    </ul>
+  </div>
+</article>

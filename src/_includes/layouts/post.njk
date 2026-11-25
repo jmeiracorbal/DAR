@@ -1,0 +1,51 @@
+---
+layout: layouts/base.njk
+---
+<article class="post">
+  <header class="post__header container container--narrow">
+    <a class="back-link" href="/archive/">← All posts</a>
+    <h1 class="post__title">{{ title }}</h1>
+    <p class="post__lead">{{ description }}</p>
+    <p class="meta">
+      By {{ site.author }}
+      <span aria-hidden="true">·</span>
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ content | readingTime }}</span>
+    </p>
+  </header>
+
+  <figure class="post__hero container">
+    <img src="{{ image }}" alt="{{ imageAlt }}" width="1600" height="1000">
+    <figcaption>Photo by <a href="{{ credit.url }}">{{ credit.name }}</a> on Unsplash</figcaption>
+  </figure>
+
+  <div class="post__content prose container container--narrow">
+    {{ content | safe }}
+  </div>
+
+  <footer class="post__footer container container--narrow">
+    <ul class="tag-list" aria-label="Topics">
+      {% for tag in tags %}{% if tag != "posts" %}
+      <li><a class="tag" href="/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
+      {% endif %}{% endfor %}
+    </ul>
+
+    {% set previousPost = collections.posts | getNextCollectionItem(page) %}
+    {% set nextPost = collections.posts | getPreviousCollectionItem(page) %}
+    <nav class="pager" aria-label="More posts">
+      {% if previousPost %}
+      <a class="pager__link" href="{{ previousPost.url }}" rel="prev">
+        <span class="pager__label">← Older</span>
+        <span class="pager__title">{{ previousPost.data.title }}</span>
+      </a>
+      {% else %}<span></span>{% endif %}
+      {% if nextPost %}
+      <a class="pager__link pager__link--next" href="{{ nextPost.url }}" rel="next">
+        <span class="pager__label">Newer →</span>
+        <span class="pager__title">{{ nextPost.data.title }}</span>
+      </a>
+      {% endif %}
+    </nav>
+  </footer>
+</article>

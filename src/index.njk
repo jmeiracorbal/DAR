@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+---
+<section class="hero">
+  <div class="container hero__inner">
+    <p class="eyebrow">{{ site.tagline }}</p>
+    <h1 class="hero__title">How machine learning <span class="gradient-text">models learn</span></h1>
+    <p class="hero__text">{{ site.description }}</p>
+    <div class="hero__actions">
+      <a class="button" href="{{ collections.posts[0].url }}">Read the latest post</a>
+      <a class="button button--ghost" href="/archive/">Browse the archive</a>
+    </div>
+  </div>
+</section>
+
+{% set featured = collections.posts[0] %}
+<section class="container section" aria-labelledby="featured-heading">
+  <h2 id="featured-heading" class="section__title">Latest post</h2>
+  <article class="featured">
+    <a class="featured__media" href="{{ featured.url }}" tabindex="-1" aria-hidden="true">
+      <img src="{{ featured.data.image }}" alt="" width="1600" height="1000">
+    </a>
+    <div class="featured__body">
+      <p class="meta">
+        <time datetime="{{ featured.date | isoDate }}">{{ featured.date | readableDate }}</time>
+        <span aria-hidden="true">·</span>
+        <span>{{ featured.templateContent | readingTime }}</span>
+      </p>
+      <h3 class="featured__title"><a href="{{ featured.url }}">{{ featured.data.title }}</a></h3>
+      <p>{{ featured.data.description }}</p>
+      <a class="read-more" href="{{ featured.url }}">Continue reading →</a>
+    </div>
+  </article>
+</section>
+
+<section class="container section" aria-labelledby="recent-heading">
+  <h2 id="recent-heading" class="section__title">More posts</h2>
+  <div class="card-grid">
+    {% for post in collections.posts.slice(1) %}
+      {% include "partials/post-card.njk" %}
+    {% endfor %}
+  </div>
+</section>

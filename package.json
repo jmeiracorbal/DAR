@@ -1,0 +1,14 @@
+{
+  "name": "gradient-notes",
+  "version": "1.0.0",
+  "description": "A small static blog about machine learning, built with Eleventy.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.8"
+  }
+}

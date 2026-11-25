@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+title: Archive
+description: Every post published on the blog, newest first.
+permalink: /archive/
+---
+<section class="container section">
+  <header class="page-header">
+    <h1>Archive</h1>
+    <p>{{ collections.posts.length }} posts, newest first.</p>
+  </header>
+  <div class="card-grid">
+    {% for post in collections.posts %}
+      {% include "partials/post-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
